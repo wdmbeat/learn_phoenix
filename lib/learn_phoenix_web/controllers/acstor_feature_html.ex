@@ -8,6 +8,7 @@ defmodule LearnPhoenixWeb.AcstorFeatureHTML do
   """
   attr :changeset, Ecto.Changeset, required: true
   attr :action, :string, required: true
+  attr :storage_types, :list, required: true
 
   def acstor_feature_form(assigns)
 end

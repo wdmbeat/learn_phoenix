@@ -4,7 +4,9 @@
   </.error>
   <.input field={f[:name]} type="text" label="Name" />
   <.input field={f[:description]} type="text" label="Description" />
-
+  <%= if @storage_types != [] do %>
+    <.checkgroup field={f[:storage_types]} label="Storage Types" options={@storage_types} />
+  <% end %>
   <:actions>
     <.button>Save Acstor feature</.button>
   </:actions>

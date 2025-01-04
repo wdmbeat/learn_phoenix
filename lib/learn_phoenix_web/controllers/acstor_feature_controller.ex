@@ -11,7 +11,7 @@ defmodule LearnPhoenixWeb.AcstorFeatureController do
 
   def new(conn, _params) do
     changeset = TestCoverage.change_acstor_feature(%AcstorFeature{})
-    storage_types = TestCoverage.list_storage_types()
+    storage_types = TestCoverage.list_storage_types() |> Enum.map(&{&1.name, &1.id})
     render(conn, :new, changeset: changeset, storage_types: storage_types)
   end
 
@@ -29,18 +29,24 @@ defmodule LearnPhoenixWeb.AcstorFeatureController do
   end
 
   def show(conn, %{"id" => id}) do
-    acstor_feature = TestCoverage.get_acstor_feature!(id)
+    acstor_feature = TestCoverage.get_acstor_feature!(id) |> TestCoverage.preload_storage_types()
     render(conn, :show, acstor_feature: acstor_feature)
   end
 
   def edit(conn, %{"id" => id}) do
-    acstor_feature = TestCoverage.get_acstor_feature!(id)
+    acstor_feature = TestCoverage.get_acstor_feature!(id) |> TestCoverage.preload_storage_types()
+    storage_types = TestCoverage.list_storage_types() |> Enum.map(&{&1.name, &1.id})
     changeset = TestCoverage.change_acstor_feature(acstor_feature)
-    render(conn, :edit, acstor_feature: acstor_feature, changeset: changeset)
+
+    render(conn, :edit,
+      acstor_feature: acstor_feature,
+      changeset: changeset,
+      storage_types: storage_types
+    )
   end
 
   def update(conn, %{"id" => id, "acstor_feature" => acstor_feature_params}) do
-    acstor_feature = TestCoverage.get_acstor_feature!(id)
+    acstor_feature = TestCoverage.get_acstor_feature!(id) |> TestCoverage.preload_storage_types()
 
     case TestCoverage.update_acstor_feature(acstor_feature, acstor_feature_params) do
       {:ok, acstor_feature} ->

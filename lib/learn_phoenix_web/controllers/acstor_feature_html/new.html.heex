@@ -3,6 +3,10 @@
   <:subtitle>Use this form to manage acstor_feature records in your database.</:subtitle>
 </.header>
 
-<.acstor_feature_form changeset={@changeset} action={~p"/acstor_features"} />
+<.acstor_feature_form
+  changeset={@changeset}
+  action={~p"/acstor_features"}
+  storage_types={@storage_types}
+/>
 
 <.back navigate={~p"/acstor_features"}>Back to acstor_features</.back>

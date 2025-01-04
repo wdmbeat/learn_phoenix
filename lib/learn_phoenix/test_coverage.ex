@@ -197,4 +197,8 @@ defmodule LearnPhoenix.TestCoverage do
   def change_acstor_feature(%AcstorFeature{} = acstor_feature, attrs \\ %{}) do
     AcstorFeature.changeset(acstor_feature, attrs)
   end
+
+  def preload_storage_types(acstor_feature) do
+    Repo.preload(acstor_feature, :storage_types)
+  end
 end
