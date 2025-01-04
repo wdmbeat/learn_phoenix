@@ -9,29 +9,34 @@ defmodule LearnPhoenix.Books.Book do
     timestamps(type: :utc_datetime)
   end
 
-  @genres_options [
-    "fantasy",
-    "sci-fi",
-    "dystopian",
-    "adventure",
-    "romance",
-    "mystery",
-    "horror",
-    "thriller",
-    "historical-fiction",
-    "young-adult",
-    "children-fiction",
-    "autobiography",
-    "biography",
-    "cooking"
+  @genre_options [
+    {"Fantasy", "fantasy"},
+    {"Science Fiction", "sci-fi"},
+    {"Dystopian", "dystopian"},
+    {"Adventure", "adventure"},
+    {"Romance", "romance"},
+    {"Detective & Mystery", "mystery"},
+    {"Horror", "horror"},
+    {"Thriller", "thriller"},
+    {"Historical Fiction", "historical-fiction"},
+    {"Young Adult (YA)", "young-adult"},
+    {"Children's Fiction", "children-fiction"},
+    {"Memoir & Autobiography", "autobiography"},
+    {"Biography", "biography"},
+    {"Cooking", "cooking"}
+    # ...
   ]
+
+  # It becomes the following at compile time:
+  # @valid_genres ["fantasy", "sci-fi", "dystopian", "adventure", ...]
+  @valid_genres Enum.map(@genre_options, fn {_text, val} -> val end)
 
   @doc false
   def changeset(book, attrs) do
     book
     |> cast(attrs, [:title, :genres])
     |> validate_required([:title, :genres])
-    |> clean_and_validate_array(:genres, @genres_options)
+    |> clean_and_validate_array(:genres, @valid_genres)
   end
 
   @doc """
@@ -77,4 +82,6 @@ defmodule LearnPhoenix.Books.Book do
   def trim_array(changeset, field, blank \\ "") do
     update_change(changeset, field, &Enum.reject(&1, fn item -> item == blank end))
   end
+
+  def genre_options, do: @genre_options
 end
