@@ -16,8 +16,8 @@ defmodule LearnPhoenix.TestCoverage.AcstorFeature do
   def changeset(acstor_feature, attrs) do
     acstor_feature
     |> cast(attrs, [:name, :description])
-    |> validate_required([:name, :description])
     |> put_assoc(:storage_types, parse_storage_types(attrs))
+    |> validate_required([:name, :description])
   end
 
   defp parse_storage_types(%{"storage_type_ids" => ids}) when is_list(ids) do
