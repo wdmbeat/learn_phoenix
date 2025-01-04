@@ -149,6 +149,10 @@ defmodule LearnPhoenix.TestCoverage do
     %AcstorFeature{}
     |> AcstorFeature.changeset(attrs)
     |> Repo.insert()
+    |> case do
+      {:ok, acstor_feature} -> {:ok, Repo.preload(acstor_feature, :storage_types)}
+      error -> error
+    end
   end
 
   @doc """
@@ -165,8 +169,13 @@ defmodule LearnPhoenix.TestCoverage do
   """
   def update_acstor_feature(%AcstorFeature{} = acstor_feature, attrs) do
     acstor_feature
+    |> Repo.preload(:storage_types)
     |> AcstorFeature.changeset(attrs)
     |> Repo.update()
+    |> case do
+      {:ok, updated_acstor_feature} -> {:ok, Repo.preload(updated_acstor_feature, :storage_types)}
+      error -> error
+    end
   end
 
   @doc """

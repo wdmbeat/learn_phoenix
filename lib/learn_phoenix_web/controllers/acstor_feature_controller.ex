@@ -23,7 +23,7 @@ defmodule LearnPhoenixWeb.AcstorFeatureController do
         |> redirect(to: ~p"/acstor_features/#{acstor_feature}")
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        storage_types = TestCoverage.list_storage_types()
+        storage_types = TestCoverage.list_storage_types() |> Enum.map(&{&1.name, &1.id})
         render(conn, :new, changeset: changeset, storage_types: storage_types)
     end
   end
@@ -46,7 +46,7 @@ defmodule LearnPhoenixWeb.AcstorFeatureController do
   end
 
   def update(conn, %{"id" => id, "acstor_feature" => acstor_feature_params}) do
-    acstor_feature = TestCoverage.get_acstor_feature!(id) |> TestCoverage.preload_storage_types()
+    acstor_feature = TestCoverage.get_acstor_feature!(id)
 
     case TestCoverage.update_acstor_feature(acstor_feature, acstor_feature_params) do
       {:ok, acstor_feature} ->
