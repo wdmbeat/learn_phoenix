@@ -24,6 +24,13 @@ defmodule LearnPhoenixWeb.Router do
 
     live "/storage_type", StorageTypeLive
     live "/test_coverage_management", TestCoverageManagement
+
+    live "/workloads", WorkloadLive.Index, :index
+    live "/workloads/new", WorkloadLive.Index, :new
+    live "/workloads/:id/edit", WorkloadLive.Index, :edit
+
+    live "/workloads/:id", WorkloadLive.Show, :show
+    live "/workloads/:id/show/edit", WorkloadLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
