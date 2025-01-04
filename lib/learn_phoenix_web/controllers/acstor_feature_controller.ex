@@ -11,7 +11,8 @@ defmodule LearnPhoenixWeb.AcstorFeatureController do
 
   def new(conn, _params) do
     changeset = TestCoverage.change_acstor_feature(%AcstorFeature{})
-    render(conn, :new, changeset: changeset)
+    storage_types = TestCoverage.list_storage_types()
+    render(conn, :new, changeset: changeset, storage_types: storage_types)
   end
 
   def create(conn, %{"acstor_feature" => acstor_feature_params}) do
@@ -22,7 +23,8 @@ defmodule LearnPhoenixWeb.AcstorFeatureController do
         |> redirect(to: ~p"/acstor_features/#{acstor_feature}")
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, :new, changeset: changeset)
+        storage_types = TestCoverage.list_storage_types()
+        render(conn, :new, changeset: changeset, storage_types: storage_types)
     end
   end
 
