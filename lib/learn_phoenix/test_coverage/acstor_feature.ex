@@ -6,7 +6,9 @@ defmodule LearnPhoenix.TestCoverage.AcstorFeature do
     field :name, :string
     field :description, :string
 
-    many_to_many :storage_types, LearnPhoenix.TestCoverage.StorageType, join_through: "acstor_features_storage_types"
+    many_to_many :storage_types, LearnPhoenix.TestCoverage.StorageType,
+      join_through: "acstor_features_storage_types"
+
     timestamps(type: :utc_datetime)
   end
 
@@ -21,6 +23,7 @@ defmodule LearnPhoenix.TestCoverage.AcstorFeature do
   defp parse_storage_types(%{"storage_type_ids" => ids}) when is_list(ids) do
     Enum.map(ids, &get_storage_type/1)
   end
+
   defp parse_storage_types(_), do: []
 
   defp get_storage_type(id) do

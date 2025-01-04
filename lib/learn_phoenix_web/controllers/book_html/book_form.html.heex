@@ -1,0 +1,21 @@
+<.simple_form :let={f} for={@changeset} action={@action}>
+  <.error :if={@changeset.action}>
+    Oops, something went wrong! Please check the errors below.
+  </.error>
+  <.input field={f[:title]} type="text" label="Title" />
+  <.checkgroup
+    field={f[:genres]}
+    label="Genres"
+    options={LearnPhoenix.Books.Book.genre_options()}
+  />
+  <%!-- <.input
+    field={f[:genres]}
+    type="checkgroup"
+    label="Genres"
+    multiple={true}
+    options={LearnPhoenix.Books.Book.genre_options()}
+  /> --%>
+  <:actions>
+    <.button>Save Book</.button>
+  </:actions>
+</.simple_form>

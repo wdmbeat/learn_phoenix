@@ -7,7 +7,11 @@
   </:actions>
 </.header>
 
-<.table id="acstor_features" rows={@acstor_features} row_click={&JS.navigate(~p"/acstor_features/#{&1}")}>
+<.table
+  id="acstor_features"
+  rows={@acstor_features}
+  row_click={&JS.navigate(~p"/acstor_features/#{&1}")}
+>
   <:col :let={acstor_feature} label="Name"><%= acstor_feature.name %></:col>
   <:col :let={acstor_feature} label="Description"><%= acstor_feature.description %></:col>
   <:action :let={acstor_feature}>
@@ -17,7 +21,11 @@
     <.link navigate={~p"/acstor_features/#{acstor_feature}/edit"}>Edit</.link>
   </:action>
   <:action :let={acstor_feature}>
-    <.link href={~p"/acstor_features/#{acstor_feature}"} method="delete" data-confirm="Are you sure?">
+    <.link
+      href={~p"/acstor_features/#{acstor_feature}"}
+      method="delete"
+      data-confirm="Are you sure?"
+    >
       Delete
     </.link>
   </:action>

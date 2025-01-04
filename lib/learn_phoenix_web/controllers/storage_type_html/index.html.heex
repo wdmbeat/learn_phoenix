@@ -7,7 +7,11 @@
   </:actions>
 </.header>
 
-<.table id="storage_types" rows={@storage_types} row_click={&JS.navigate(~p"/storage_types/#{&1}")}>
+<.table
+  id="storage_types"
+  rows={@storage_types}
+  row_click={&JS.navigate(~p"/storage_types/#{&1}")}
+>
   <:col :let={storage_type} label="Name"><%= storage_type.name %></:col>
   <:action :let={storage_type}>
     <div class="sr-only">

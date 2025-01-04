@@ -275,7 +275,7 @@ defmodule LearnPhoenixWeb.CoreComponents do
 
   attr :type, :string,
     default: "text",
-    values: ~w(checkbox color date datetime-local email file month number password
+    values: ~w(checkbox checkgroup color date datetime-local email file month number password
                range search select tel text textarea time url week)
 
   attr :field, Phoenix.HTML.FormField,
@@ -300,6 +300,34 @@ defmodule LearnPhoenixWeb.CoreComponents do
     |> assign_new(:name, fn -> if assigns.multiple, do: field.name <> "[]", else: field.name end)
     |> assign_new(:value, fn -> field.value end)
     |> input()
+  end
+
+  def input(%{type: "checkgroup"} = assigns) do
+    ~H"""
+    <div phx-feedback-for={@name} class="text-sm">
+      <.label for={@id}><%= @label %></.label>
+      <div class="mt-1 w-full bg-white border border-gray-300 ...">
+        <div class="grid grid-cols-1 gap-1 text-sm items-baseline">
+          <input type="hidden" name={@name} value="" />
+          <div :for={{label, value} <- @options} class="...">
+            <label for={"#{@name}-#{value}"} class="...">
+              <input
+                type="checkbox"
+                id={"#{@name}-#{value}"}
+                name={@name}
+                value={value}
+                checked={value in @value}
+                class="mr-2 h-4 w-4 rounded ..."
+                {@rest}
+              />
+              <%= label %>
+            </label>
+          </div>
+        </div>
+      </div>
+      <.error :for={msg <- @errors}><%= msg %></.error>
+    </div>
+    """
   end
 
   def input(%{type: "checkbox"} = assigns) do
@@ -672,5 +700,27 @@ defmodule LearnPhoenixWeb.CoreComponents do
   """
   def translate_errors(errors, field) when is_list(errors) do
     for {^field, {msg, opts}} <- errors, do: translate_error({msg, opts})
+  end
+
+  @doc """
+  Generate a checkbox group for multi-select.
+  """
+  attr :id, :any
+  attr :name, :any
+  attr :label, :string, default: nil
+  attr :field, Phoenix.HTML.FormField, doc: "..."
+  attr :errors, :list
+  attr :required, :boolean, default: false
+  attr :options, :list, doc: "..."
+  attr :rest, :global, include: ~w(disabled form readonly)
+  attr :class, :string, default: nil
+
+  def checkgroup(assigns) do
+    new_assigns =
+      assigns
+      |> assign(:multiple, true)
+      |> assign(:type, "checkgroup")
+
+    input(new_assigns)
   end
 end

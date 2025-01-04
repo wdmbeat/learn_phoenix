@@ -35,13 +35,18 @@ defmodule LearnPhoenix.TestCoverageTest do
       storage_type = storage_type_fixture()
       update_attrs = %{name: "some updated name"}
 
-      assert {:ok, %StorageType{} = storage_type} = TestCoverage.update_storage_type(storage_type, update_attrs)
+      assert {:ok, %StorageType{} = storage_type} =
+               TestCoverage.update_storage_type(storage_type, update_attrs)
+
       assert storage_type.name == "some updated name"
     end
 
     test "update_storage_type/2 with invalid data returns error changeset" do
       storage_type = storage_type_fixture()
-      assert {:error, %Ecto.Changeset{}} = TestCoverage.update_storage_type(storage_type, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               TestCoverage.update_storage_type(storage_type, @invalid_attrs)
+
       assert storage_type == TestCoverage.get_storage_type!(storage_type.id)
     end
 
@@ -77,7 +82,9 @@ defmodule LearnPhoenix.TestCoverageTest do
     test "create_acstor_feature/1 with valid data creates a acstor_feature" do
       valid_attrs = %{name: "some name", description: "some description"}
 
-      assert {:ok, %AcstorFeature{} = acstor_feature} = TestCoverage.create_acstor_feature(valid_attrs)
+      assert {:ok, %AcstorFeature{} = acstor_feature} =
+               TestCoverage.create_acstor_feature(valid_attrs)
+
       assert acstor_feature.name == "some name"
       assert acstor_feature.description == "some description"
     end
@@ -90,21 +97,29 @@ defmodule LearnPhoenix.TestCoverageTest do
       acstor_feature = acstor_feature_fixture()
       update_attrs = %{name: "some updated name", description: "some updated description"}
 
-      assert {:ok, %AcstorFeature{} = acstor_feature} = TestCoverage.update_acstor_feature(acstor_feature, update_attrs)
+      assert {:ok, %AcstorFeature{} = acstor_feature} =
+               TestCoverage.update_acstor_feature(acstor_feature, update_attrs)
+
       assert acstor_feature.name == "some updated name"
       assert acstor_feature.description == "some updated description"
     end
 
     test "update_acstor_feature/2 with invalid data returns error changeset" do
       acstor_feature = acstor_feature_fixture()
-      assert {:error, %Ecto.Changeset{}} = TestCoverage.update_acstor_feature(acstor_feature, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               TestCoverage.update_acstor_feature(acstor_feature, @invalid_attrs)
+
       assert acstor_feature == TestCoverage.get_acstor_feature!(acstor_feature.id)
     end
 
     test "delete_acstor_feature/1 deletes the acstor_feature" do
       acstor_feature = acstor_feature_fixture()
       assert {:ok, %AcstorFeature{}} = TestCoverage.delete_acstor_feature(acstor_feature)
-      assert_raise Ecto.NoResultsError, fn -> TestCoverage.get_acstor_feature!(acstor_feature.id) end
+
+      assert_raise Ecto.NoResultsError, fn ->
+        TestCoverage.get_acstor_feature!(acstor_feature.id)
+      end
     end
 
     test "change_acstor_feature/1 returns a acstor_feature changeset" do
