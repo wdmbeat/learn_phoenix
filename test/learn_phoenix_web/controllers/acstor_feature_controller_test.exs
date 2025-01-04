@@ -41,7 +41,10 @@ defmodule LearnPhoenixWeb.AcstorFeatureControllerTest do
   describe "edit acstor_feature" do
     setup [:create_acstor_feature]
 
-    test "renders form for editing chosen acstor_feature", %{conn: conn, acstor_feature: acstor_feature} do
+    test "renders form for editing chosen acstor_feature", %{
+      conn: conn,
+      acstor_feature: acstor_feature
+    } do
       conn = get(conn, ~p"/acstor_features/#{acstor_feature}/edit")
       assert html_response(conn, 200) =~ "Edit Acstor feature"
     end
