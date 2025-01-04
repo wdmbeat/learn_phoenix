@@ -1,0 +1,16 @@
+<.header>
+  Acstor feature <%= @acstor_feature.id %>
+  <:subtitle>This is a acstor_feature record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/acstor_features/#{@acstor_feature}/edit"}>
+      <.button>Edit acstor_feature</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name"><%= @acstor_feature.name %></:item>
+  <:item title="Description"><%= @acstor_feature.description %></:item>
+</.list>
+
+<.back navigate={~p"/acstor_features"}>Back to acstor_features</.back>

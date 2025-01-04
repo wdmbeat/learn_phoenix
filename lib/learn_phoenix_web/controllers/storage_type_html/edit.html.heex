@@ -1,0 +1,8 @@
+<.header>
+  Edit Storage type <%= @storage_type.id %>
+  <:subtitle>Use this form to manage storage_type records in your database.</:subtitle>
+</.header>
+
+<.storage_type_form changeset={@changeset} action={~p"/storage_types/#{@storage_type}"} />
+
+<.back navigate={~p"/storage_types"}>Back to storage_types</.back>

@@ -1,0 +1,15 @@
+<.header>
+  Storage type <%= @storage_type.id %>
+  <:subtitle>This is a storage_type record from your database.</:subtitle>
+  <:actions>
+    <.link href={~p"/storage_types/#{@storage_type}/edit"}>
+      <.button>Edit storage_type</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Name"><%= @storage_type.name %></:item>
+</.list>
+
+<.back navigate={~p"/storage_types"}>Back to storage_types</.back>
