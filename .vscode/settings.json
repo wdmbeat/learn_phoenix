@@ -1,10 +1,13 @@
 {
+  "elixirLS.suggestSpecs": false,
+  "elixirLS.dialyzerEnabled": true,
+  "elixirLS.signatureAfterComplete": false,
+  "elixirLS.fetchDeps": true,
   "editor.formatOnSave": true,
   // Enable inline suggestions for code completions and type hints
   "editor.inlineSuggest.enabled": true,
   "files.associations": {
     "*.heex": "phoenix-heex",
-    "*.eex": "phoenix-heex",
     "*.livemd": "markdown"
   },
   "tailwindCSS.includeLanguages": {
@@ -16,22 +19,17 @@
   ],
   "emmet.showAbbreviationSuggestions": true,
   "emmet.includeLanguages": {
+    "elixir": "html",
     "phoenix-heex": "html",
-    "html-eex": "html",
-    "elixir": "html"
+    "html-eex": "html"
   },
+  "emmet.triggerExpansionOnTab": true,
   "editor.quickSuggestions": {
     "comments": "inline",
     "strings": "on",
     "other": "on"
   },
-  // Enable the ElixirLS Dialyzer integration for type checking
-  "elixirLS.dialyzerEnabled": true,
-  // Enable fetch dependencies automatically when ElixirLS starts
-  "elixirLS.fetchDeps": true,
-  "elixirLS.signatureAfterComplete": false,
   "elixirLS.trace.server": "off",
-  "elixirLS.suggestSpecs": false,
   "[phoenix-heex]": {
     "editor.formatOnSave": true,
   },
