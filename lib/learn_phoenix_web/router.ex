@@ -23,8 +23,6 @@ defmodule LearnPhoenixWeb.Router do
     resources "/posts", PostController
     resources "/storage_types", StorageTypeController
     resources "/acstor_features", AcstorFeatureController
-
-    resources "/books", BookController
   end
 
   # Other scopes may use custom stacks.
