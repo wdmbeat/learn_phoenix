@@ -22,8 +22,39 @@ defmodule LearnPhoenixWeb.BookLive.FormComponent do
         <.input field={@form[:title]} type="text" label="Title" />
         <.input field={@form[:price]} type="number" label="Price" step="any" />
         <.input field={@form[:publication_date]} type="datetime-local" label="Publication date" />
+
+        <h1 class="text-md font-semibold leading-8 text-zinc-800">
+          Authors
+        </h1>
+        <div id="authors" phx-hook="SortableInputsFor" class="space-y-2">
+          <.inputs_for :let={b_author} field={@form[:book_authors]}>
+            <div class="flex space-x-2 drag-item">
+              <%!-- <.icon name="hero-bars-3" class="w-6 h-6 relative top-2" data-handle /> --%>
+              <input type="hidden" name="book[authors_order][]" value={b_author.index} />
+              <.input
+                type="select"
+                field={b_author[:author_id]}
+                placeholder="Author"
+                options={@authors}
+              />
+              <label>
+                <input
+                  type="checkbox"
+                  name="book[authors_delete][]"
+                  value={b_author.index}
+                  class="hidden"
+                />
+                <.icon name="hero-x-mark" class="w-6 h-6 relative top-2" />
+              </label>
+            </div>
+          </.inputs_for>
+        </div>
         <:actions>
           <.button phx-disable-with="Saving...">Save Book</.button>
+          <label class="block cursor-pointer">
+            <input type="checkbox" name="book[authors_order][]" class="hidden" />
+            <.icon name="hero-plus-circle" /> add more
+          </label>
         </:actions>
       </.simple_form>
     </div>
