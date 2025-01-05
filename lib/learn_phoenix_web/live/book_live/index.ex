@@ -55,8 +55,7 @@ defmodule LearnPhoenixWeb.BookLive.Index do
       |> assign_form(book_changeset)
       |> assign_authors()
 
-    # {:ok, socket}
-    socket
+    {:ok, socket}
   end
 
   defp assign_form(socket, %Ecto.Changeset{} = changeset) do
