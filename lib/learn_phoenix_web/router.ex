@@ -23,6 +23,19 @@ defmodule LearnPhoenixWeb.Router do
     resources "/posts", PostController
     resources "/storage_types", StorageTypeController
     resources "/acstor_features", AcstorFeatureController
+
+    live "/books", BookLive.Index, :index
+    live "/books/new", BookLive.Index, :new
+    live "/books/:id/edit", BookLive.Index, :edit
+    live "/books/:id", BookLive.Show, :show
+    live "/books/:id/show/edit", BookLive.Show, :edit
+
+    live "/authors", AuthorLive.Index, :index
+    live "/authors/new", AuthorLive.Index, :new
+    live "/authors/:id/edit", AuthorLive.Index, :edit
+
+    live "/authors/:id", AuthorLive.Show, :show
+    live "/authors/:id/show/edit", AuthorLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
